@@ -28,7 +28,6 @@ const CreatePrompt = () => {
       </h1>
       <form onSubmit={onSubmit} className='flex justify-center items-center md:pt-40 pt-20'>
         <div className='border border-gray-300 rounded p-4 w-1/2 flex flex-col items-center'>
-          {/* Border, padding, and rounded corners */}
           <label className='block mb-2 font-bold md:text-3xl text-2xl'>Your valuable prompt</label>
           <input
             className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-sm'
