@@ -10,7 +10,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getPrompts = async () => {
       try {
-        const response = await axios.get('/api/all-prompts')
+         await axios.get('/api/all-prompts/')
         .then((data) => {
           setPrompts(data.data.prompts)
         })
@@ -20,7 +20,7 @@ const Dashboard = () => {
       }
     };
 
-    getPrompts();
+    getPrompts()
   }, []);
 
   return (
