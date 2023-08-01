@@ -13,7 +13,7 @@ export async function POST(req) {
 
         await connectDB()
         const goodPrompt = await Prompt.create({prompt})
-        return NextResponse.json({prompt: goodPrompt})
+        return NextResponse.json({goodPrompt})
 
 
     }catch(err){

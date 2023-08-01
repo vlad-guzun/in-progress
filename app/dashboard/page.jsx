@@ -11,9 +11,10 @@ const Dashboard = () => {
     const getPrompts = async () => {
       try {
         const response = await axios.get('/api/all-prompts')
-        const data = response.data
-        const prompts = data.prompts
-        setPrompts(prompts)
+        .then((data) => {
+          setPrompts(data.data.prompts)
+        })
+               
       } catch (err) {
         console.log(err);
       }
