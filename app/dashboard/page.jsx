@@ -1,8 +1,8 @@
 'use client'
 
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
-import {BiUpvote} from 'react-icons/bi'
+import React, { useState, useEffect } from 'react';
+import { BiUpvote } from 'react-icons/bi';
 
 const Dashboard = () => {
   const [prompts, setPrompts] = useState([]);
@@ -10,17 +10,14 @@ const Dashboard = () => {
   useEffect(() => {
     const getPrompts = async () => {
       try {
-         await axios.get('/api/all-prompts/')          
-        .then((data) => {
-          setPrompts(data.data.prompts)
-        })
-               
+        const response = await axios.get('/api/all-prompts/');
+        setPrompts(response.data.prompts);
       } catch (err) {
         console.log(err);
       }
     };
 
-    getPrompts()
+    getPrompts();
   }, []);
 
   return (
@@ -33,10 +30,14 @@ const Dashboard = () => {
       <div className='max-w-2xl mx-auto mt-4'>
         {prompts.map((prompt) => (
           <div
+            key={prompt._id}
             className='text-2xl border-blue-900 p-4 rounded-lg mb-4 flex justify-center sm:p-2 sm:border-2/3 border'
           >
             {prompt.prompt}
-            <button>{<BiUpvote />}{1}</button>
+            <button>
+              <BiUpvote />
+              {1}
+            </button>
           </div>
         ))}
       </div>
