@@ -1,36 +1,43 @@
 'use client'
 
-import { useState } from "react"
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import {BiUpvote} from 'react-icons/bi'
 
 const Dashboard = () => {
-  const [prompt, setPrompt] = useState('')
+  const [prompts, setPrompts] = useState([]);
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    console.log(prompt)
-  };
+  useEffect(() => {
+    const getPrompts = async () => {
+      try {
+        const response = await axios.get('/api/all-prompts');
+        setPrompts(response.data.prompts);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getPrompts();
+  }, []);
 
   return (
-    <div className='text-4xl md:text-5xl sm:text-3xl text-blue-950 mt-12 md:mt-20'>
-      <h1 className='text-center'>
-        <b>Create a prompt</b>
-        <span>
-          <b className='text-purple-900'> ,of value</b>
-        </span>
+    <div className='text-center mt-10 md:mt-25'>
+      <h1 className='text-4xl lg:text-5xl sm:text-2xl text-blue-900'>
+        <b>Discover the best prompts</b>
       </h1>
-      <form onSubmit={onSubmit} className='flex justify-center items-center md:pt-40 pt-20'>
-        <div className='border border-gray-300 rounded p-4 w-1/2 flex flex-col items-center'>
-          {/* Border, padding, and rounded corners */}
-          <label className='block mb-2 font-bold md:text-3xl text-2xl'>Your valuable prompt</label>
-          <input
-            className='w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 text-sm'
-            placeholder='how do I make an HTTP request in javascript'
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-          />
-          <button className='bg-blue-950 text-white border-none p-2 mt-4 text-2xl md:text-3xl'><b>make sure it's <span className='text-pink-600'>good</span></b></button>
-        </div>
-      </form>
+      <p>rated by upvotes</p>
+
+      <div className='max-w-2xl mx-auto mt-4'>
+        {prompts.map((prompt) => (
+          <div
+            key={prompt._id}
+            className='text-2xl border-blue-900 p-4 rounded-lg mb-4 flex justify-center sm:p-2 sm:border-2/3 border'
+          >
+            {prompt.prompt}
+            <button>{<BiUpvote />}{Math.ceil(Math.random() * 10)}</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
