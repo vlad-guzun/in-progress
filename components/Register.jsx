@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/register', inputs)
+      const response = await axios.post('/api/auth/register', inputs)
       if(response.data.message === 'User already exists!') {
         toast.error('User already exists, please login')
         return

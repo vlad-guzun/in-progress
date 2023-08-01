@@ -26,7 +26,7 @@ const Login = () => {
   const onSubmit = async(e) => {
     e.preventDefault()
 
-    const response = await axios.post('http://localhost:3000/api/auth/login', inputs)
+    const response = await axios.post('api/auth/login', inputs)
     if(response.data.message === 'Invalid credentials!') {
       toast.error('Invalid credentials!')
       return
